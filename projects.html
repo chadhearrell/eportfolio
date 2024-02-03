@@ -25,7 +25,7 @@
 <main>
 
 	<!-- Back to top button -->
-	<a href="#" type="button" class="btn btn-primary btn-floating btn-lg" id="btn-back-to-top">
+	<a href="#" type="button" class="btn btn-primary btn-floating" id="btn-back-to-top">
 		<i class="fas fa-arrow-up"></i>
 	</a>
 
@@ -41,7 +41,7 @@
 			</header>
 	</section>
 
-	<a href="index.html#portfolio" type="button" class="btn btn-primary btn-floating btn-lg" id="btn-to-home" style="
+	<a href="index.html#portfolio" type="button" class="btn btn-primary btn-floating" id="btn-to-home" style="
 	margin-left: 1em;">
 		<i class="fas fa-arrow-left"></i>
 		Back
@@ -72,7 +72,13 @@
 			<p id="projectSolution">
 			</p>
 
-			<br /><br />
+			<br />
+
+			<div id="specialNote" class="hidden">
+				<p class="alert alert-primary font-weight-light text-center">Note that the following imagery is derivative of the original product and is representational in nature. Moreover, I created the following image compositions using my own hardware/software resources.</p>
+				<br/>
+			</div>
+			
 			<div>
 				<section class="portfolio">
 					<div class="container aos-init aos-animate" data-aos="fade-up">
@@ -81,6 +87,13 @@
 						</div>
 					</div>
 				</section>
+				
+				<!--Navigation Buttons-->
+				<br><br>
+				<div class="project-btns">
+					<a href="#" id="prevProject"><button type="button" class="btn btn-primary">Previous Project</button></a>
+					<a href="#" id="nextProject"><button type="button" class="btn btn-primary">Next Project</button></a>
+				</div>
 			</div>
 		</div>
 	</div>

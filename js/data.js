@@ -50,7 +50,7 @@ let data = [
 
     {
         id:"VIRT_CLASS", 
-        title: "Manual Gunnery Video", 
+        title: "Virtual Classroom Environment", 
         keywords: ["3D Development", "Client Project", "Graphic Design", "Gamification", "Instructional Design"],
         year: "2019", 
         role: "For this project, I rendered still images to help create an interactive virtual classroom.", 
@@ -62,7 +62,7 @@ let data = [
 
     {
         id:"VEHI_NAVI", 
-        title: "Manual Gunnery Video", 
+        title: "Vehicle Navigation Segment", 
         keywords: ["3D Development", "Client Project", "Graphic Design", "Instructional Design"],
         year: "2016", 
         role: "I worked with a team of developers to set up cameras and render stills of tactical equipment to create an interactive navigational screen.", 

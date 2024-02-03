@@ -86,6 +86,10 @@ li>a:hover {
   text-align: center;
 }
 
+.hidden{
+  display: none;
+}
+
 .card-text {
   padding-left: 15px;
   padding-right: 15px;
@@ -328,4 +332,9 @@ li>a:hover {
 
 .portfolio-details .portfolio-description p {
   padding: 0;
+}
+
+.project-btns{
+  display: flex;
+  justify-content: space-between;
 }

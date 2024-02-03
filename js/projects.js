@@ -17,7 +17,38 @@ $(function () {
   
   AOS.init();
   parseId();
+  getNextAndPrevIds();
 });
+
+//Get the IDs for the next and previous projects
+const getNextAndPrevIds = function(){
+  let activeIdIndex = "";
+  for (var i = 0; i < data.length; i++) {
+    const id = data[i].id;
+    if (id === activeId) {
+      activeIdIndex = i;
+      break;
+    }
+  }
+
+  //Get previous id
+  if(activeIdIndex == 0){
+    prevId = data[data.length-1].id;
+  }else{
+    prevId = data[activeIdIndex-1].id;
+  }
+
+  //Get next id
+  if(activeIdIndex == data.length-1){
+    nextId = data[0].id;
+  }else{
+    nextId = data[activeIdIndex + 1].id;
+  }
+
+  //Update the links  
+  $("#prevProject").attr("href", `projects.html?id=${prevId}`);
+  $("#nextProject").attr("href", `projects.html?id=${nextId}`);
+};
 
 //Parse the ID from the URL
 const parseId = function () {
@@ -50,6 +81,7 @@ const generatePage = function () {
   let htmlStr_role = obj.role;
   let htmlStr_scope = obj.scope;
   let htmlStr_solution = obj.solution;
+  let hasSpecialNote = obj.specialNote;
   let htmlStr_artifacts = "";
   const imageFilenames = Array.from({
     length: obj.imageRange
@@ -77,6 +109,9 @@ const generatePage = function () {
   $("#projectScope").html(htmlStr_scope);
   $("#projectSolution").html(htmlStr_solution);
   $("#projectArtifacts").html(htmlStr_artifacts);
+  if(hasSpecialNote){
+    $("#specialNote").removeClass("hidden");
+  }  
 
   const options = {
     keyboard: true,
