@@ -1,13 +1,25 @@
 let data = [
 
     {
+        id:"DINN_SIMU", 
+        keywords: ["3D Development", "Personal Project", "Instructional Design"],
+        title: "Pre-Dinner Prep Simulation", 
+        year: "2024", 
+        role: "I contributed to the project by designing a range of 3D elements and supporting the graphic design efforts.", 
+        scope: "I collaborated with a fellow developer for this personal project. This project was created using the <a href='https://unity.com/' target='_blank' title='Unity'>Unity</a> game engine. The project was tailored for an audience aged 16 and older, focusing on creating an engaging and interactive experience.", 
+        solution: "The simulation offers a highly interactive experience, immersing players in the role of a homeowner preparing for a dinner party. Players navigate a virtual house, interact with labeled areas, and complete tasks that require specific tools or materials. My contributions included designing and creating 3D assets such as the table, table attachments, tools, and parts. Additionally, I created the line art for the instruction manual.", 
+        specialNote: false,
+        imageRange: 3
+    },
+
+    {
         id:"ELEA_ASSE", 
-        keywords: ["3D Development", "Client Project", "Instructional Design"],
+        keywords: ["3D Development", "Professional Project", "Instructional Design"],
         title: "eLearning Assets (Level 3 Interactivity)", 
         year: "2022", 
         role: "For this project, I helped develop 3D environments and render image stills, which were used in branching Practical Exercises (PEs).", 
-        scope: "Our team was tasked with developing eLearning content that supported <a href='https://community.articulate.com/articles/get-to-know-the-4-levels-of-e-learning' target='blank'>Level 3 Interactivity</a>. The client specified that the training material should depict the hardware using realistic 3D models, textures, and lighting. The target audience for this project was students ages 18 and up.", 
-        solution: "We used Technical Manuals and guidance from our Subject Matter Experts to ensure that our 3D environments accurately depicted Removal and Replacement Procedures. We also used accurate hardware specifications to ensure that everything that we modeled was correctly scaled.<br>The imagery that we rendered was used by developers to create branching PEs. In the PEs, students were required to use tools/parts located in the virtual bin. Students had to use the correct tool/part on the hardware prior to proceeding to the next step. Students were given tailored feedback depending on how they interacted with the hardware. Besides working on the 3D aspect, I also assisted in authoring several PE files for cross-training purposes.", 
+        scope: "Our team was tasked with developing eLearning content that supported <a href='https://community.articulate.com/articles/get-to-know-the-4-levels-of-e-learning' target='blank' title='Level 3 Interactivity'>Level 3 Interactivity</a>. The client specified that the training material should depict the hardware using realistic 3D models, textures, and lighting. The target audience for this project was students ages 18 and up.", 
+        solution: "We used Technical Manuals and guidance from our Subject Matter Experts to ensure that our 3D environments accurately depicted Removal and Replacement Procedures. We also used accurate hardware specifications to ensure that everything that we modeled was correctly scaled.<br>The imagery that we rendered was used by developers to create branching PEs. In the PEs, students were required to use tools/parts located in the virtual bin. Students were required to use the correct tool/part on the hardware prior to proceeding to the next step. Students were given tailored feedback depending on how they interacted with the hardware. Besides working on the 3D aspect, I also assisted in authoring several PE files for cross-training purposes.", 
         specialNote: true,
         imageRange: 2
     },
@@ -51,7 +63,7 @@ let data = [
     {
         id:"VIRT_CLASS", 
         title: "Virtual Classroom Environment", 
-        keywords: ["3D Development", "Client Project", "Graphic Design", "Gamification", "Instructional Design"],
+        keywords: ["3D Development", "Professional Project", "Graphic Design", "Instructional Design"],
         year: "2019", 
         role: "For this project, I rendered still images to help create an interactive virtual classroom.", 
         scope: "The client specified that they wanted a motivational piece added to the tactical software training course. They stated that it should also incorporate gamification techniques.", 
@@ -63,7 +75,7 @@ let data = [
     {
         id:"VEHI_NAVI", 
         title: "Vehicle Navigation Segment", 
-        keywords: ["3D Development", "Client Project", "Graphic Design", "Instructional Design"],
+        keywords: ["3D Development", "Professional Project", "Graphic Design", "Instructional Design"],
         year: "2016", 
         role: "I worked with a team of developers to set up cameras and render stills of tactical equipment to create an interactive navigational screen.", 
         scope: "This navigational segment allowed students to navigate to different areas of the equipment. Moreover, it served as a way for students to identify areas of interest as they performed Removal and Replacement Procedures.", 
@@ -76,7 +88,7 @@ let data = [
         id:"INTRO_GUNN", 
         title: "Manual Gunnery Video", 
         year: "2015", 
-        keywords: ["Video Editing", "In-House Project", "Graphic Design", "Instructional Design"],
+        keywords: ["Video Editing", "Professional Project", "Graphic Design", "Instructional Design"],
         role: "I worked with a team of developers to render still images and animate cameras/3D models.", 
         scope: "Our manager expressed the need to have a business development video that explains how to perform Manual Gunnery with the intent that a ballistic round hits a designated target. Our manager specified that this concept is often difficult to grasp for entry-level students.", 
         solution: "We had a short turnaround for this project, therefore, we decided to repurpose an older 3D environment to speed up the development process. We also used a Technical Manual to ensure that we correctly depicted procedural steps. We demoed the project at business development conferences and during in-person tours of the company.", 
@@ -87,7 +99,7 @@ let data = [
     {
         id:"FOUN_BALL", 
         title: "Foundations of Ballistics Vignettes", 
-        keywords: ["3D Development", "In-House Project", "Video Editing", "Instructional Design"],
+        keywords: ["3D Development", "Professional Project", "Video Editing", "Instructional Design"],
         year: "2014", 
         role: "I worked with other developers to set up the 3D environment, render still images, and animate several video vignettes. ", 
         scope: "Our manager expressed the need to create video vignettes that explain the foundations of ballistics. In particular, our manager wanted us to incorporate 3D imagery and motion graphics to appeal to younger students ranging from ages 18-30.", 
