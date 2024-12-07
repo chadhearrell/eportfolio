@@ -136,8 +136,8 @@ function modalHandler(event, idValue) {
   $("#nextProject").on("click", function () {
     navigateProject("next");
     $("body").addClass("no-scroll");
-  });  
-
+  });
+  
   $("#projectModal").on("show.bs.modal", function () {
     $("body").addClass("no-scroll");
   });
@@ -145,34 +145,31 @@ function modalHandler(event, idValue) {
   $("#projectModal").on("hidden.bs.modal", function () {
     $("body").removeClass("no-scroll");
   });
-
-
+  
   function navigateProject(direction) {
-    const currentElement = $(`[data-id="${activeId}"]`).closest(".portfolio-item");
-    let targetElement;
-  
+    const currentIndex = data.findIndex(item => item.id === activeId);
+    
+    // Determine the next index based on direction
+    let newIndex;
     if (direction === "prev") {
-      targetElement = currentElement.prev(".portfolio-item");
+      newIndex = (currentIndex - 1 + data.length) % data.length; // Wrap around to the end if at the start
     } else if (direction === "next") {
-      targetElement = currentElement.next(".portfolio-item");
+      newIndex = (currentIndex + 1) % data.length; // Wrap around to the start if at the end
     }
   
-    if (targetElement.length) {
-      const newId = targetElement.find("[data-id]").data("id");
-      modalHandler(event, newId); 
-     }
+    const newId = data[newIndex].id;
+    modalHandler(event, newId); 
   }
-
-//Get the object data based on the ID
-const getObjData = function () {
-  for (var i = 0; i < data.length; i++) {
-    const id = data[i].id;
-
-    if (id === activeId) {
-      return data[i];
+  
+  // Get the object data based on the ID
+  const getObjData = function () {
+    for (var i = 0; i < data.length; i++) {
+      const id = data[i].id;
+      if (id === activeId) {
+        return data[i];
+      }
     }
-  }
-}
+  };
 
 //Generate the page content based on the slide ID
 const generatePage = function () {
