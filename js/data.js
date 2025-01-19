@@ -1,10 +1,22 @@
 let data = [
 
     {
+        id:"COMP_BRAND", 
+        keywords: ["Personal Project", "Graphic Design"],
+        title: "Summit Solutions Company Branding", 
+        year: "2025", 
+        role: "I led the creation of a comprehensive branding guidelines packet for Summit Solutions, a fictitious consulting company. My work involved developing key brand elements that define the company’s visual identity and ensuring consistency across all materials.", 
+        scope: "This project included designing and documenting the core branding components for Summit Solutions, including the company history, brand overview, logo icon styling, logo application rules, logo variations, typography, and color palette. The branding was crafted with the intent to position Summit Solutions as a trusted, professional, and modern consulting partner.", 
+        solution: "The final branding guide encapsulates the essence of Summit Solutions, providing clear guidelines on logo usage, typography, and color scheme. I established rules for logo placement and application to ensure brand consistency across various platforms and materials. The color palette, typography, and visual elements were thoughtfully selected to convey reliability, clarity, and professionalism, strengthening the company's identity in the consulting industry.", 
+        specialNote: false,
+        imageRange: 10
+    },
+    
+    {
         id:"DINN_SIMU", 
         keywords: ["3D Development", "Personal Project", "Instructional Design"],
         title: "Pre-Dinner Prep Simulation", 
-        year: "2024", 
+        year: "2025", 
         role: "I contributed to the project by designing a range of 3D elements and supporting the graphic design efforts.", 
         scope: "I collaborated with a fellow developer for this personal project. This project was created using the <a href='https://unity.com/' target='_blank' title='Unity'>Unity</a> game engine. The project was tailored for an audience aged 16 and older, focusing on creating an engaging and interactive experience.", 
         solution: "The simulation offers a highly interactive experience, immersing players in the role of a homeowner preparing for a dinner party. Players navigate a virtual house, interact with labeled areas, and complete tasks that require specific tools or materials. My contributions included designing and creating 3D assets such as the table, table attachments, tools, and parts. Additionally, I created the line art for the instruction manual.", 
