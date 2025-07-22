@@ -2,351 +2,145 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<title>Chad Hearrell's ePortfolio</title>
-
-	<link rel="icon" href="favicon_io/favicon-16x16.png" sizes="16x16" type="image/png">
-	<link rel="icon" href="favicon_io/favicon-32x32.png" sizes="32x32" type="image/png">
-	<link rel="apple-touch-icon" href="favicon_io/apple-touch-icon.png">
-	<link rel="icon" href="favicon_io/android-chrome-192x192.png" sizes="192x192" type="image/png">
-	<link rel="icon" href="favicon_io/android-chrome-512x512.png" sizes="512x512" type="image/png">
-
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="keywords" content="">
-	<meta name="description" content="">
-
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-		integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.css">
-	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <meta charset="utf-8">
+    <title id="siteTitle">ePortfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
 </head>
-<main>
 
-	<!-- Back to top button -->
-	<a href="#" type="button" title="Back to Top" class="btn btn-primary btn-floating btn-lg" id="btn-back-to-top">
-		<i class="fa-solid fa-chevron-up"></i>
-	</a>
+<body>
 
-	<section class="text-center cover" id="home">
+    <main>
 
-		<!--Navigation-->
-		<nav class="navbar navbar-expand-lg">
-			<div class="container-fluid">
-			  <a class="navbar-brand" href="#">Chad Hearrell</a>
-			  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-				<span class="navbar-toggler-icon"></span>
-			  </button>
-			  <div class="collapse navbar-collapse justify-content-end text-center" id="collapsibleNavbar">
-				<ul class="navbar-nav">
-				  <li class="nav-item">
-					<a href="#about" id="menu-about" class="nav-link" title="About">About</a>
-				  </li>  
-				  <li class="nav-item">
-					<a href="#competencies" id="menu-competencies" class="nav-link" title="Competencies">Competencies</a>
-				  </li>			
-				  <li class="nav-item">
-					<a href="#portfolio" id="menu-portfolio" class="nav-link" title="Portfolio">Portfolio</a>
-				  </li>    
-				  <li class="nav-item">
-					<a href="#contact" id="menu-contact" class="nav-link" title="Contact">Contact</a>
-				  </li>    
-				</ul>
-			  </div>
-			</div>
-		  </nav>
-		
-		
-		<!--Hero-->
-		<div class="row py-lg-4 coverParagraph">
-			<div class="col-lg-10 col-md-8 mx-auto">
-				<h1 class="intro-title mb-4 fw-bold">Welcome to my ePortfolio!</h1>
-				<p class="intro-tagline">I'm a <span class="text-slider-items">3D Developer, Multimedia
-						Designer, Instructional Designer, Graphic Artist, Web Designer</span><strong class="text-slider textEmphasis"></strong></p>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#" id="navbarBrand">ePortfolio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end text-center" id="collapsibleNavbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="#proficiencies" class="nav-link">Proficiencies</a></li>
+                        <li class="nav-item"><a href="#competencies" class="nav-link">Competencies</a></li>
+                        <li class="nav-item"><a href="#featured" class="nav-link">Featured Work</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-				<br />
-				<p>
-					<a href="#about" class="btn btn-primary my-2" title="Start Exploring">Start Exploring</a>
-				</p>
-			</div>
-		</div>
-	</section>
+        <!-- Hero -->
+        <section class="text-center cover" id="home">
+            <div class="row py-lg-4 coverParagraph">
+                <div class="col-lg-10 col-md-8 mx-auto">
+                    <h1 class="intro-title fw-bold">Welcome to my ePortfolio!</h1>
+                    <p class="intro-tagline">
+                        I'm a <span class="text-slider-items"></span>
+                        <strong class="text-slider textEmphasis"></strong>
+                    </p>
+                    <a href="#about" class="btn btn-primary my-2" title="Start Exploring">Start Exploring</a>
+                </div>
+            </div>
+        </section>
 
-	<!--About-->
-	<div class="py-5 container">
-		<div id="about"></div>
-		<h2 class="sectionHeader">About</h2>
-		<p>Hi, my name is <span class="textEmphasis bold">Chad Hearrell</span>. I am a collaborative and detail-oriented professional with experience across various fields. I have a proven track record of delivering high-fidelity products that exceed expectations. 
+        <!-- About -->
+        <section class="py-5 container" id="about">
+            <h2 class="sectionHeader">About</h2>
+            <p id="about-content"></p>
+        </section>
 
-			Some of my hobbies include character modeling and animation, VR/AR development, and jogging.
-			
-			If you're interested in learning more about me or my capabilities, please feel
-			free to <a href="#contact" title="Contact Me">contact me.</a></p>
+        <!-- Proficiencies -->
+        <section class="py-5 bg-body-tertiary" id="proficiencies">
+            <div class="container">
+                <h2 class="sectionHeader">Proficiencies</h2>
+                <div id="proficiencies-container"></div>
+            </div>
+        </section>
 
-	</div>
+        <!-- Competencies -->
+        <section class="py-5" id="competencies">
+            <div class="container">
+                <h2 class="sectionHeader">Competencies</h2>
+                <div id="competencies-container" class="row g-4 justify-content-center"></div>
+            </div>
+        </section>
 
-	<!--Competencies-->
-	<div class="py-5 bg-body-tertiary">
-		<div id="competencies"></div>
-		<div class="container">
-			<h2 class="sectionHeader">Competencies</h2>
-
-			<p>I have a diverse set of skills that enable me to tackle challenges to deliver desired results. Below are a few of my core competencies that highlight my skill sets.</p><br>
-
-			<div class="row row-cols-1 row-cols-md-3 g-4 card-container">
-				<div class="col">
-					<div class="card"><br />
-						<div class="service-ico">
-							<i class="fa-solid fa-cube"></i>
-						</div>
-						<div class="card-body">
-							<h5 class="card-title text-center">3D Design</h5>
-							<p class="card-text">I have expertise in creating 3D designs, animations, and environments that bring depth and realism to my projects.</p><br />
-						</div>
-					</div>
-				</div>
-
-				<div class="col">
-					<div class="card"><br />
-						<div class="service-ico">
-							<i class="fa-solid fa-chalkboard-teacher"></i>
-						</div>
-						<div class="card-body">
-							<h5 class="card-title text-center">Instructional Design</h5>
-							<p class="card-text">I specialize in eLearning development, combining technical writing and multimedia skills to create cohesive and immersive learning experiences.</p><br />
-						</div>
-					</div>
-				</div>
-
-				<div class="col">
-					<div class="card"><br />
-						<div class="service-ico">
-							<i class="fa-solid fa-desktop"></i>
-						</div>
-						<div class="card-body">
-							<h5 class="card-title text-center">Web Design</h5>
-							<p class="card-text">I specialize in custom web design, creating impactful online experiences that strengthen brand presence and encourage user engagement.</p><br />
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="card"><br />
-						<div class="service-ico">
-							<i class="fa-solid fa-video"></i>
-						</div>
-						<div class="card-body">
-							<h5 class="card-title text-center">Videography</h5>
-							<p class="card-text">I focus on visual storytelling through videography, capturing meaningful moments and transforming them into compelling narratives.</p><br />
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="card"><br />
-						<div class="service-ico">
-							<i class="fa-solid fa-paintbrush"></i>
-						</div>
-						<div class="card-body">
-							<h5 class="card-title text-center">Graphic Design</h5>
-							<p class="card-text">I have a strong background in graphic design, covering various aspects of visual communication such as branding, marketing materials, and digital content creation.</p><br />
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="card"><br />
-						<div class="service-ico">
-							<i class="fa-solid fa-camera"></i>
-						</div>
-						<div class="card-body">
-							<h5 class="card-title text-center">Photography</h5>
-							<p class="card-text">I capture moments and document special events and products My approach brings stories to life through captivating visuals.</p><br />
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!--Portfolio-->
-	<div class="py-5 container">
-		<div id="portfolio"></div>
-		<h2 class="sectionHeader">Portfolio</h2><br />
-
-		<section id="portfolio" class="portfolio">
-			<div class="container portfolio">
-
-				<!--
-				<div class="filter-section">
-					<div class="dropdown">
-						<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Filter by Tag">
-						  Filter by: All
-						</button><br>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						  	<a class="dropdown-item filter-option" href="#" data-filter="All" title="All">All</a>
-							<a class="dropdown-item filter-option" href="#" data-filter="Featured" title="Featured">Featured</a>
-						   	<a class="dropdown-item filter-option" href="#" data-filter="3D Development" title="3D Development">3D Development</a>
-							<a class="dropdown-item filter-option" href="#" data-filter="Graphic Design" title="Graphic Design">Graphic Design</a>
-							<a class="dropdown-item filter-option" href="#" data-filter="Instructional Design" title="Instructional Design">Instructional Design</a>
-						  	<a class="dropdown-item filter-option" href="#" data-filter="Personal Project" title="Personal Project">Personal Project</a>
-							<a class="dropdown-item filter-option" href="#" data-filter="Professional Project" title="Professional PRoject">Professional Project</a>							
-							<a class="dropdown-item filter-option" href="#" data-filter="Video Editing" title="Video Editing">Video Editing</a>
-						</div>
-					  </div>
-					  </div> -->
-					
+        <!-- Featured Work -->
+        <section class="py-5 container bg-body-tertiary" id="featured">
+            <h2 class="sectionHeader">Featured Work</h2>
+            <div id="portfolioAssets" class="row portfolio-container"></div>
+        </section>
 
 
-				<div id="portfolioAssets" class="row portfolio-container aos-init" style="position: relative;">
-				</div>
-			</div>
-		</section>
-	</div>
+        <section class="stats-block" id="stats-block"></section>
+        <section class="final-cta bg-body-tertiary" id="final-cta"></section>
 
-		<!--Fun Fact-->
-		<div class="vg-page page-funfact" id="funfact">
-			<div class="container">
-				<div class="row section-counter">
-					<div class="col-md-6 col-lg-3 py-4">
-						<h1 class="number" data-number="10">10</h1>
-						<span>Years of Experience</span>
-					</div>
-					<div class="col-md-6 col-lg-3 py-4">
-						<h1 class="number" data-number="4">4</h1>
-						<span>Awards Won</span>
-					</div>
-					<div class="col-md-6 col-lg-3 py-4">
-						<h1 class="number" data-number="230">230</h1>
-						<span>Projects Completed</span>
-					</div>
-					<div class="col-md-6 col-lg-3 py-4">
-						<h1 class="number" data-number="30000">699</h1>
-						<span>Project Hours Invested</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	
+        <!-- Modal Template -->
+        <div class="modal fade" id="projectModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-container text-center">
+                            <h5 id="projectTitle" class="modal-title">Title</h5>
+                            <h6 id="projectSubtitle" class="modal-subtitle">2024</h6>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="projectTags"></div>
+                        <div id="projectDemo"></div>
 
-	<!--Contact-->
-	<div class="bg-body-tertiary">	<br />		
-		<h2 class="sectionHeader fw-bold">Contact</h2>
+                        <div class="alert alert-primary text-center hidden" id="specialNote">
+                            The visuals presented here are conceptual recreations based on original products.
+                        </div>
 
-		<div class="py-5 container center-form">
-			<div id="contact"></div>
+                        <div id="demoLinks" class="mb-4"></div>
 
-			<div class="col-md-6">
-				<form id="contactForm">
-					<div class="mb-3">
-						<label class="form-label" for="name">Name</label>
-						<input class="form-control" id="name" type="text" placeholder="Name"
-							data-sb-validations="required" />
-					</div>
-					<div class="mb-3">
-						<label class="form-label" for="emailAddress">Email Address</label>
-						<input class="form-control" id="emailAddress" type="email" placeholder="Email Address"
-							data-sb-validations="required, email" />
-					</div>
-
-					<div class="mb-3">
-						<label class="form-label" for="message">Message</label>
-						<textarea class="form-control" id="message" type="text" placeholder="Message"
-							style="height: 10rem;" data-sb-validations="required"></textarea>
-					</div>
-
-					<div class="d-grid">
-						<button class="btn btn-primary" type="submit" id="submitBtn" title="Submit">Submit</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-
-</main>
-
-<!--Footer-->
-<footer class="text-body-secondary py-3">
-	<div class="container">
-		<p class="mb-1 footer">&copy; Chad Hearrell <span id="currentYear"></span></p>
-	</div>
-</footer>
-
-
-  <!-- Portfolio Modal -->
-  <div class="modal fade" id="projectModal" tabindex="-1" aria-labelledby="projectModal" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-	  <div class="modal-content">
-		<div class="modal-header">
-
-			<div class="modal-container text-center">
-				<h5 id="projectTitle" class="modal-title">Title</h5>
-				<h6 id="projectSubtitle" class="modal-subtitle">2024</h6>
-			</div>
-		   
-		  
-		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" title="Close"></button>
-		  
-		</div>
-		
-		<div class="modal-body">
-			<div id="projectTags" class="">
-			</div>
-
-			<br />
-			<h4>Role</h4>
-			<p id="projectRole">
-
-			</p>
-
-			<br />
-			<h4>Scope</h4>
-			<p id="projectScope">
-
-			</p>
-
-			<br />
-			<h4>Solution</h4>
-			<p id="projectSolution">
-			</p>
-
-			<br />
-
-			<div class="imageArtifacts">
-			</div>
-
-			<div class="alert alert-primary text-center hidden" id="specialNote">
-				Note that the following imagery is derivative of the original product and is representational in nature.<br>Moreover, I created the following image compositions using my own hardware/software resources.
-			</div><br>
-
-			<div id="projectArtifacts" class="row portfolio-container">
-			</div>
-		</div>
+                        <h4>Overview</h4>
+                        <p id="projectAbout"></p>
+                        <h4>Results</h4>
+                        <p id="projectSolution"></p>
+                    </div>
+                    <div class="modal-footer justify-content-between bg-body-tertiary">
+                        <button type="button" class="btn btn-primary" id="prevProject">Previous Project</button>
+                        <button type="button" class="btn btn-primary" id="nextProject">Next Project</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
-		<div class="modal-footer justify-content-between bg-body-tertiary">
-		  <button type="button" class="btn btn-primary" id="prevProject" title="Previous Project">Previous Project</button>
-		  <button type="button" class="btn btn-primary" id="nextProject" title="Next Project">Next Project</button>
-		</div>
-	  </div>
-	</div>
-  </div>
+        <!-- Footer -->
+        <footer class="text-body-secondary py-3 text-center">
+            <p class="mb-1 footer">&copy; <span id="footerName">Chad Hearrell</span> <span id="currentYear"></span></p>
+        </footer>
+    </main>
 
-<!-- JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-	integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
-</script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"
-	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/16.1.3/smooth-scroll.min.js"
-	integrity="sha512-HYG9E+RmbXS7oy529Nk8byKFw5jqM3R1zzvoV2JnltsIGkK/AhZSzciYCNxDMOXEbYO9w6MJ6SpuYgm5PJPpeQ=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="js/jquery.animateNumber.min.js"></script>
-<script src="js/typed.min.js"></script>
-<script src="js/data.js"></script>
-<script src="js/index.js"></script>
+    <!-- Back to top button -->
+    <a href="#" class="btn btn-primary btn-floating btn-lg" id="btn-back-to-top" title="Back to Top">
+        <i class="fa-solid fa-chevron-up"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WN6STJZ7EJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-WN6STJZ7EJ');
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/typed.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/index.js"></script>
 </body>
+
 </html>

@@ -1,277 +1,325 @@
-let arr = ["about", "services", "portfolio", "contact"];
 let scrollOffset = 460;
+let animProgressBars = true;
+let animStats = true;
 let activeId = "";
 
-$(function () {
-  $(document).scroll(function () {
+$(function() {
+    $(document).scroll(function() {
+        let scrollTop = $(this).scrollTop();
 
-    //Animate progress on enter
-    let animProgressBars = true;
-    if ($(this).scrollTop() >= Math.round($("#competencies").position().top - scrollOffset) && animProgressBars) {                        
-        $("div.progress").find(".progress-bar").each(function(){
-          $(this).css("width", $(this).attr("aria-valuenow") + "%");
-          $(".progress-bar").addClass("animated");
-        });          
-        animProgressBars = false;
+        // Proficiencies animation
+        if (scrollTop >= Math.round($("#about").position().top - scrollOffset) && animProgressBars) {
+            $("div.progress").find(".progress-bar").each(function() {
+                $(this).css("width", $(this).attr("aria-valuenow") + "%");
+                $(".progress-bar").addClass("animated");
+            });
+            animProgressBars = false;
+        }
+
+        // Stats block animation
+        if (scrollTop >= Math.round($("#stats-block").position().top - scrollOffset) && animStats) {
+            counterInit();
+            animStats = false;
+        }
+    });
+
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    $("#currentYear").html(year);
+
+    let displayName = portfolioOwner.name;
+    let possessive = displayName.endsWith("s") ? `${displayName}'` : `${displayName}'s`;
+    $("#siteTitle").html(`${possessive} ePortfolio`);
+
+    AOS.init();
+    initHeroAnimation();
+    generatePortfolio();
+    updateBrandAndAbout();
+    generateProficiencies();
+    generateCompetencies();
+    generateStatsBlock();
+    generateFinalCTA();
+});
+
+function initHeroAnimation() {
+    const phrases = portfolioOwner.heroAnimation || [];
+
+    if (!phrases.length || !$(".text-slider").length) {
+        $(".intro-tagline").hide();
+        return;
     }
 
-    //Animate fun fact div
-   if ($(this).scrollTop() >= Math.round($("#portfolio").position().top - scrollOffset)) {
-      counterInit();
-    } 
-  });
+    $(".text-slider-items").empty();
 
-  var currentDate = new Date();
-  var year = currentDate.getFullYear();
-  $("#currentYear").html(year);
+    if (typeof Typed !== "undefined") {
+        new Typed(".text-slider", {
+            strings: phrases,
+            typeSpeed: 50,
+            backDelay: 1500,
+            loop: true,
+            backSpeed: 30
+        });
+    }
+}
 
-  AOS.init();
-  generatePortfolio();
+function updateBrandAndAbout() {
+    if (portfolioOwner) {
+        $(".navbar-brand").text(portfolioOwner.name);
+        $("#about-content").html(portfolioOwner.about +
+            `<br/><br/><a href="${portfolioOwner.linkedin}" class="btn btn-primary" target="_blank" title="Let's Connect">Let's Connect <i class="fa-solid fa-arrow-right"></i></a>`);
+    }
+}
 
+function generateProficiencies() {
+    if (!portfolioOwner?.proficiencies) return;
+    let html = "";
+    portfolioOwner.proficiencies.forEach(item => {
+        html += `
+      <span>${item.label}</span>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="${item.value}" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>`;
+    });
 
-});
+    $("#proficiencies-container").html(html);
+}
 
-//Update navbar button color on click
-$("a").on("click", function () {
-  let id = $(this).attr("id");
-  resetActiveBtns();
-  $(this).addClass("active");
-});
+function generateCompetencies() {
+    if (!portfolioOwner?.competencies) return;
 
-//Reset navbar button colors
-const resetActiveBtns = function () {
-  arr.forEach(element => {
-    $(`#menu-${element}`).removeClass("active");
-  });
-};
-
-//Generate the portfolio assets
-const generatePortfolio = function () {
-  let htmlStr = "";
-
-  for (var i = 0; i < data.length; i++) {
-    let id = data[i].id;
-    let title = data[i].title;
-    let year = data[i].year;
-    let keywords = data[i].keywords;
-    let featuredStar = "";
-
-    htmlStr += `<div class="col-lg-4 col-md-6 portfolio-item" data-tags="${keywords}">
-    ${featuredStar}
-      <div class="portfolio-wrap">
-        
-        <a href="#" data-id="${id}" title="${title}" onclick="modalHandler(event, '${id}')">
-        <div class="portfolio-image-container">
-          <img src="images/${id}_thumb.jpg" class="img-fluid" alt="${title}">
-           <div class="overlay"></div>
+    let html = '<div class="row row-cols-1 row-cols-md-4 g-4">';
+    portfolioOwner.competencies.forEach(item => {
+        html += `
+      <div class="col">
+        <div class="card text-center p-3">
+          <div class="service-ico">
+            <i class="fa-solid ${item.icon}"></i>
+          </div>
+          <h5 class="card-title mt-3">${item.title}</h5>
         </div>
-        <div class="portfolio-info">
-        
-        <h4>${title}</h4>
-        <p>${year}</p>        
-        
-        </div>
-      </div>
-      </a>
-      </div>`
-  }
+      </div>`;
+    });
+    html += '</div>';
 
-  $("#portfolioAssets").html(htmlStr);
+    $("#competencies-container").html(html);
 }
 
+function generatePortfolio() {
+    const grouped = {};
+    data.forEach(project => {
+        const categoryName = projectCategories[project.categoryKey] || "Other";
+        if (!grouped[categoryName]) {
+            grouped[categoryName] = [];
+        }
+        grouped[categoryName].push(project);
+    });
 
-//Contact form Submit button handler
-$('#submitBtn').on('click', function () {
-  var name = $('#name').val();
-  var emailAddress = $('#emailAddress').val();
-  var message = $('#message').val();
+    let htmlStr = "";
 
-  var subject = encodeURIComponent('Portfolio');
-  var body = encodeURIComponent('Name: ' + name + '\nEmail: ' + emailAddress + '\nMessage: ' + message);
+    Object.entries(grouped).forEach(([category, projects]) => {
+        htmlStr += `<h3 class="portfolio-category-header mb-4">${category}</h3><div class="row g-4">`;
 
-  var mailtoLink = 'mailto:chadhearrell@mailinator.com?subject=' + subject + '&body=' + body;
-  window.open(mailtoLink, '_blank');
-});
+        projects.forEach(project => {
+            htmlStr += `
+        <div class="col-lg-4 col-md-6">
+          <div class="artifact-card h-100">
+            <img src="images/${project.id}_thumb.jpg" alt="${project.title}" class="artifact-thumb" />
+            <div class="artifact-content">
+              <h4 class="artifact-title">${project.title}</h4>
+              <p class="artifact-year">${project.year}</p>
+              <p class="artifact-description">${project.description || ''}</p>
+              <a class="btn" href="#" onclick="modalHandler(event, '${project.id}')" title="View Project">View Project</a>
+            </div>
+          </div>
+        </div>`;
+        });
 
-//Animates the 'typing' text on page Hero
-if ($(".text-slider").length == 1) {
-  var typed_strings = $(".text-slider-items").text();
-  var typed = new Typed(".text-slider", {
-    strings: typed_strings.split(","),
-    typeSpeed: 80,
-    loop: true,
-    backDelay: 1100,
-    backSpeed: 30
-  });
+        htmlStr += `</div><br/>`;
+    });
+
+    $("#portfolioAssets").html(htmlStr);
 }
-
-//Animates the Fun Fact section
-const counterInit = function () {
-  var comma_separator_number_step = $.animateNumber.numberStepFactories.separator(",");
-  $(".number").each(function () {
-    var $this = $(this),
-      num = $this.data('number');
-    $this.animateNumber({
-      number: num,
-      numberStep: comma_separator_number_step
-    }, 5000);
-  });
-}
-
 
 function modalHandler(event, idValue) {
-  event.preventDefault(); 
-  activeId = idValue;
-  generatePage();
-  $("#projectModal").modal("show");
-  $("#projectModal").scrollTop(0);
+    event.preventDefault();
+    activeId = idValue;
+    generateModalContent();
+    $("#projectModal").modal("show");
+    $("#projectModal").scrollTop(0);
 }
 
-  //Update the links  
-  $("#prevProject").on("click", function () {
-    navigateProject("prev");
-    $("body").addClass("no-scroll");
-  });
-  
-  $("#nextProject").on("click", function () {
-    navigateProject("next");
-    $("body").addClass("no-scroll");
-  });
-  
-  $("#projectModal").on("show.bs.modal", function () {
-    $("body").addClass("no-scroll");
-  });
-  
-  $("#projectModal").on("hidden.bs.modal", function () {
-    $("body").removeClass("no-scroll");
-  });
-  
-  function navigateProject(direction) {
-    const currentIndex = data.findIndex(item => item.id === activeId);
-    
-    // Determine the next index based on direction
-    let newIndex;
-    if (direction === "prev") {
-      newIndex = (currentIndex - 1 + data.length) % data.length; // Wrap around to the end if at the start
-    } else if (direction === "next") {
-      newIndex = (currentIndex + 1) % data.length; // Wrap around to the start if at the end
-    }
-  
-    const newId = data[newIndex].id;
-    modalHandler(event, newId); 
-  }
-  
-  // Get the object data based on the ID
-  const getObjData = function () {
-    for (var i = 0; i < data.length; i++) {
-      const id = data[i].id;
-      if (id === activeId) {
-        return data[i];
-      }
-    }
-  };
+function updateModalNavButtons() {
 
-//Generate the page content based on the slide ID
-const generatePage = function () {
+    const obj = data.find(item => item.id === activeId);
+    if (!obj || !obj.categoryKey) return;
 
-  const obj = getObjData();
+    const categoryProjects = data.filter(p => p.categoryKey === obj.categoryKey);
+    const currentIndex = categoryProjects.findIndex(p => p.id === activeId);
 
-  // Reset special note
-  $("#specialNote").addClass("hidden");
+    const $prevBtn = $("#prevProject");
+    const $nextBtn = $("#nextProject");
 
-  let htmlStr_title = obj.title;
-  let htmlStr_tags = "";
-  let htmlStr_role = obj.role;
-  let htmlStr_scope = obj.scope;
-  let htmlStr_solution = obj.solution;
-  let hasSpecialNote = obj.specialNote;
-  let htmlStr_artifacts = "";
-  let htmlStr_subtitle = obj.year;
-  const imageFilenames = Array.from({
-    length: obj.imageRange
-  }, (_, index) => `images/${activeId}_${index.toString().padStart(3, '0')}.jpg`);
-
-  obj.keywords.sort();
-  obj.keywords.forEach(element => {
-    htmlStr_tags += `<span class="badge tag">${element}</span> `;
-  });
-
-  for (var i = 0; i < imageFilenames.length; i++) {
-    const imageName = imageFilenames[i];
-    htmlStr_artifacts += `<div class="col-12 mb-4 d-flex justify-content-center portfolio-item">      
-                                    <img src="${imageName}" class="img-fluid custom-rounded" alt="Gallery Image ${i+1}" title="Gallery Image ${i+1}">                                     
-                                  </div> 
-                                </div>`;
-  }
-
-  $("#projectTitle").html(htmlStr_title);
-  $("#projectTags").html(htmlStr_tags);
-  $("#projectRole").html(htmlStr_role);
-  $("#projectScope").html(htmlStr_scope);
-  $("#projectSolution").html(htmlStr_solution);
-  $("#projectArtifacts").html(htmlStr_artifacts);
-  $("#projectSubtitle").html(htmlStr_subtitle);
-  if(hasSpecialNote){
-    $("#specialNote").removeClass("hidden");
-  }  
-}
-
-//----------
-
-//Filter functionality
-$(".filter-option[data-filter='All']").trigger("click");
-
-  $(".filter-option").click(function(event) {
-    event.preventDefault(); 
-    
-    var filter = $(this).data("filter");
-
-    $(".filter-option").removeClass("active");
-    $(this).addClass("active");
-
-    if (filter === "All") {
-      $(".portfolio-item").fadeIn();
-    } else {
-
-      $(".portfolio-item").fadeOut();
-      $(".portfolio-item").each(function() {
-        var itemTags = $(this).data("tags").split(","); 
-        if (itemTags.includes(filter)) {
-          $(this).fadeIn();
-        }
-      });
+    if (categoryProjects.length <= 1) {
+        $prevBtn.prop("disabled", true);
+        $nextBtn.prop("disabled", true);
+        return;
     }
 
-    $("#dropdownMenuButton").text("Filter by: " + (filter === "All" ?  "All" : filter));
-    $(".dropdown-menu").removeClass("show");
-  });
+    $prevBtn.prop("disabled", false);
+    $nextBtn.prop("disabled", false);
 
-  $("#dropdownMenuButton").click(function(event) {
-    event.stopPropagation();
-    $(".dropdown-menu").toggleClass("show");
-  });
-
-  $(document).click(function(event) {
-    if (!$(event.target).closest(".dropdown").length) {
-      $(".dropdown-menu").removeClass("show");
-    }
-  });
-
-var scrolled = false;
-
-$(window).on('scroll', function() {
-  var portfolioSectionTop = $('#portfolio').offset().top; 
-  var viewportTop = $(window).scrollTop();
-  var viewportBottom = viewportTop + $(window).height();
-
-  if (viewportBottom > portfolioSectionTop && !$('.portfolio-item').hasClass('fade-in')) {
-    $('.portfolio-item').each(function() {
-      var elementTop = $(this).offset().top;
-      var elementBottom = elementTop + $(this).outerHeight();
-
-      if (elementBottom > viewportTop && elementTop < viewportBottom) {
-        $(this).addClass('fade-in');
-      }
+    $prevBtn.off("click").on("click", function() {
+        const prevIndex = (currentIndex - 1 + categoryProjects.length) % categoryProjects.length;
+        activeId = categoryProjects[prevIndex].id;
+        generateModalContent();
     });
-  }
-});
+
+    $nextBtn.off("click").on("click", function() {
+        const nextIndex = (currentIndex + 1) % categoryProjects.length;
+        activeId = categoryProjects[nextIndex].id;
+        generateModalContent();
+    });
+}
+
+function generateModalContent() {
+    const obj = data.find(item => item.id === activeId);
+    if (!obj) return;
+
+    $("#projectTitle").html(obj.title || "");
+    $("#projectSubtitle").html(obj.year || "");
+
+    const tagHTML = (obj.keywords || [])
+        .map(tag => `<span class="badge tag me-2">${tag}</span>`)
+        .join("");
+    $("#projectTags").html(tagHTML);
+
+    renderProjectCarousel(obj || {});
+
+    if (obj.specialNote) {
+        $("#specialNote").removeClass("hidden");
+    } else {
+        $("#specialNote").addClass("hidden");
+    }
+
+    if (obj.demo && obj.demo.length > 0) {
+        const demoHTML = obj.demo
+            .map(d => `<a href="${d.link}" target="_blank" class="btn btn-outline-primary me-2 mb-2">${d.title || "View Demo"}</a>`)
+            .join("");
+        $("#demoLinks").html(demoHTML).show();
+    } else {
+        $("#demoLinks").hide();
+    }
+
+    const aboutText = [obj.role, obj.scope].filter(Boolean).join("<br><br>");
+    $("#projectAbout").html(aboutText || "");
+    $("#projectSolution").html(obj.solution || "");
+}
+
+function renderProjectCarousel(obj) {
+    $("#carouselContainer").remove();
+
+    const count = obj.imageRange || 0;
+    if (count === 0) return;
+
+    let slides = "";
+    for (let i = 0; i < count; i++) {
+        const index = i.toString().padStart(3, '0');
+        const pngPath = `images/${obj.id}_${index}.png`;
+        const jpgPath = `images/${obj.id}_${index}.jpg`;
+
+        // Start with PNG and swap to JPG if PNG fails
+        slides += `
+      <div class="carousel-slide ${i === 0 ? "active" : ""}">
+        <img src="${pngPath}" 
+             onerror="this.onerror=null; this.src='${jpgPath}';" 
+             alt="Project Image ${i + 1}">
+      </div>`;
+    }
+
+    const hasControls = count > 1;
+    const controls = hasControls ?
+        `
+      <button class="carousel-prev" aria-label="Previous">&#10094;</button>
+      <button class="carousel-next" aria-label="Next">&#10095;</button>` :
+        "";
+
+    const carouselHTML = `
+    <div id="carouselContainer">
+      <div class="carousel-wrapper">
+        ${slides}
+        ${controls}
+      </div>
+    </div>`;
+
+    $("#projectTags").after(carouselHTML);
+
+    if (hasControls) {
+        let currentSlide = 0;
+
+        $(".carousel-prev").click(() => {
+            const total = count;
+            $(".carousel-slide").removeClass("active");
+            currentSlide = (currentSlide - 1 + total) % total;
+            $(".carousel-slide").eq(currentSlide).addClass("active");
+        });
+
+        $(".carousel-next").click(() => {
+            const total = count;
+            $(".carousel-slide").removeClass("active");
+            currentSlide = (currentSlide + 1) % total;
+            $(".carousel-slide").eq(currentSlide).addClass("active");
+        });
+    }
+
+    updateModalNavButtons();
+}
+
+function generateStatsBlock() {
+    if (!portfolioOwner?.stats) return;
+
+    let html = '<div class="container"><div class="row text-center">';
+    portfolioOwner.stats.forEach(stat => {
+        html += `
+      <div class="col-md-3 py-4">
+        <div class="number-container">
+          <h1 class="number" data-number="${stat.number}">0</h1>
+          <span class="plus">${stat.suffix || ""}</span>
+        </div>
+        <p>${stat.label}</p>
+      </div>`;
+    });
+    html += '</div></div>';
+
+    $("#stats-block").html(html);
+}
+
+function generateFinalCTA() {
+    const linkedin = portfolioOwner?.linkedin || "#";
+
+    const html = `
+    <div class="container text-center py-5">
+      <h2 class="sectionHeader">Want to Learn More?</h2>
+      <a href="${linkedin}" target="_blank" class="btn btn-primary mt-3" title="Let's Connect">Let's Connect <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  `;
+
+    $("#final-cta").html(html);
+
+}
+
+function counterInit() {
+    const comma_separator = $.animateNumber.numberStepFactories.separator(",");
+
+    $(".number").each(function() {
+        const $el = $(this);
+        const num = $el.data("number");
+
+        if (!$el.hasClass("animated")) {
+            $el.animateNumber({
+                number: num,
+                numberStep: comma_separator
+            }, 3000);
+            $el.addClass("animated");
+        }
+    });
+}
