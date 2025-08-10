@@ -1,3 +1,4 @@
+let activeCategoryKey = null;
 let scrollOffset = 460;
 let animProgressBars = true;
 let animStats = true;
@@ -29,17 +30,64 @@ $(function() {
 
     let displayName = portfolioOwner.name;
     let possessive = displayName.endsWith("s") ? `${displayName}'` : `${displayName}'s`;
-    $("#siteTitle").html(`${possessive} ePortfolio`);
+    
+    $("#footerName").html(displayName);
+    $("#siteTitle").html(`${possessive} ePortfolio`);    
 
-    AOS.init();
+    enableBlogLink();
     initHeroAnimation();
-    generatePortfolio();
+    initCategoryFilter();
+    renderPortfolioByCategory();
     updateBrandAndAbout();
     generateProficiencies();
     generateCompetencies();
     generateStatsBlock();
     generateFinalCTA();
+    initFooterSocials();
+
+    applyScrollAnimations();
+
+    AOS.init({
+        duration: 650,
+        easing: 'ease',
+        offset: 120, 
+        once: true
+    });
+
+    $(document).on('portfolio:rendered', function () {
+        applyScrollAnimations();
+    });
 });
+
+function applyScrollAnimations() {
+    const targets = [
+        '#about',                
+        '#proficiencies .container',
+        '#competencies .container',
+        '#portfolioAssets',
+        '#stats-block',
+        '#final-cta'            
+    ];
+
+    targets.forEach(sel => {
+        const $el = $(sel);
+        if ($el.length) {
+        $el.attr({
+            'data-aos': 'fade-up'
+        });
+        }
+    });
+    
+    AOS.refresh();
+}
+
+function enableBlogLink() {
+  if (portfolioOwner.blogUrl) {
+    const $blogLink = $(".nav-item a[title='Blog']");
+    $blogLink.attr("href", portfolioOwner.blogUrl);
+    $blogLink.parent().removeClass("hidden");
+  }
+}
 
 function initHeroAnimation() {
     const phrases = portfolioOwner.heroAnimation || [];
@@ -66,7 +114,7 @@ function updateBrandAndAbout() {
     if (portfolioOwner) {
         $(".navbar-brand").text(portfolioOwner.name);
         $("#about-content").html(portfolioOwner.about +
-            `<br/><br/><a href="${portfolioOwner.linkedin}" class="btn btn-primary" target="_blank" title="Let's Connect">Let's Connect <i class="fa-solid fa-arrow-right"></i></a>`);
+            `<br/><br/><a href="${portfolioOwner.linkedin}" class="btn btn-primary bounce-hover" target="_blank" title="Let's Connect">Let's Connect <i class="fa-solid fa-arrow-right"></i></a>`);
     }
 }
 
@@ -104,40 +152,67 @@ function generateCompetencies() {
     $("#competencies-container").html(html);
 }
 
-function generatePortfolio() {
-    const grouped = {};
-    data.forEach(project => {
-        const categoryName = projectCategories[project.categoryKey] || "Other";
-        if (!grouped[categoryName]) {
-            grouped[categoryName] = [];
-        }
-        grouped[categoryName].push(project);
-    });
 
-    let htmlStr = "";
 
-    Object.entries(grouped).forEach(([category, projects]) => {
-        htmlStr += `<h3 class="portfolio-category-header mb-4">${category}</h3><div class="row g-4">`;
+function initCategoryFilter() {
+  
+  const usedKeys = Object.keys(projectCategories).filter(key => {
+    return data.some(p => p.categoryKey === key);
+  });
 
-        projects.forEach(project => {
-            htmlStr += `
-        <div class="col-lg-4 col-md-6">
-          <div class="artifact-card h-100">
-            <img src="images/${project.id}_thumb.jpg" alt="${project.title}" class="artifact-thumb" />
-            <div class="artifact-content">
-              <h4 class="artifact-title">${project.title}</h4>
-              <p class="artifact-year">${project.year}</p>
-              <p class="artifact-description">${project.description || ''}</p>
-              <a class="btn" href="#" onclick="modalHandler(event, '${project.id}')" title="View Project">View Project</a>
-            </div>
+  const orderedKeys = categoryDisplayOrder.map(displayName => {
+    return Object.keys(projectCategories)
+      .find(key => projectCategories[key] === displayName);
+  }).filter(Boolean);
+
+  if (!activeCategoryKey) activeCategoryKey = orderedKeys[0];
+
+  const pills = orderedKeys.map(key => {
+    const label = projectCategories[key] || key;
+    const isActive = key === activeCategoryKey ? "active" : "";
+    return `<button class="filter-btn ${isActive}" data-key="${key}" aria-pressed="${isActive ? "true" : "false"}">${label}</button>`;
+  }).join("");
+
+  const $filter = $(`<div id="portfolioFilter" class="category-filter" role="tablist">${pills}</div>`);
+  const $existing = $("#portfolioFilter");
+  if ($existing.length) $existing.replaceWith($filter); 
+  else $("#featured h2").after($filter);
+
+  $("#portfolioFilter").on("click", ".filter-btn", function () {
+    const key = $(this).data("key");
+    if (key === activeCategoryKey) return;
+
+    activeCategoryKey = key;
+
+    $(".filter-btn").removeClass("active").attr("aria-pressed", "false");
+    $(this).addClass("active").attr("aria-pressed", "true");
+
+    renderPortfolioByCategory();
+  });
+}
+
+function renderPortfolioByCategory() {
+ 
+  const projects = data.filter(p => p.categoryKey === activeCategoryKey);
+  let htmlStr = '<div class="row g-4">';
+
+  projects.forEach(project => {
+    htmlStr += `
+      <div class="col-lg-4 col-md-6">
+        <div class="artifact-card h-100">
+          <img src="images/${project.id}_thumb.jpg" alt="${project.title}" class="artifact-thumb" />
+          <div class="artifact-content">
+            <h4 class="artifact-title">${project.title}</h4>
+            <p class="artifact-year">${project.year}</p>
+            <p class="artifact-description">${project.short_desc || ""}</p>
+            <a class="btn" href="#" onclick="modalHandler(event, '${project.id}')" title="View Project">View Project</a>
           </div>
-        </div>`;
-        });
+        </div>
+      </div>`;
+  });
 
-        htmlStr += `</div><br/>`;
-    });
-
-    $("#portfolioAssets").html(htmlStr);
+  htmlStr += "</div>";
+  $("#portfolioAssets").html(htmlStr);
 }
 
 function modalHandler(event, idValue) {
@@ -298,8 +373,8 @@ function generateFinalCTA() {
 
     const html = `
     <div class="container text-center py-5">
-      <h2 class="sectionHeader">Want to Learn More?</h2>
-      <a href="${linkedin}" target="_blank" class="btn btn-primary mt-3" title="Let's Connect">Let's Connect <i class="fa-solid fa-arrow-right"></i></a>
+      <h2 class="sectionHeader">Learn More or Collaborate?</h2>
+      <a href="${linkedin}" target="_blank" class="btn btn-primary mt-3 bounce-hover" title="Let's Connect">Let's Connect <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   `;
 
@@ -322,4 +397,23 @@ function counterInit() {
             $el.addClass("animated");
         }
     });
+}
+
+function initFooterSocials() {
+  const hasBlog = !!portfolioOwner.blogUrl;
+  const hasYouTube = !!portfolioOwner.youtubeUrl;
+  const hasSocials = hasBlog || hasYouTube;
+
+  if (!hasBlog) $("#social-blog").hide();
+  else $("#social-blog").attr("href", portfolioOwner.blogUrl);
+
+  if (!hasYouTube) $("#social-youtube").hide();
+  else $("#social-youtube").attr("href", portfolioOwner.youtubeUrl);
+
+  const $footer = $("footer");
+  if (!hasSocials) {
+    $footer.removeClass("footer-with-socials").addClass("footer-centered");
+  } else {
+    $footer.removeClass("footer-centered").addClass("footer-with-socials");
+  }
 }

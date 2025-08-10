@@ -4,7 +4,7 @@ const portfolioOwner = {
     
     With 12+ years of experience, I specialize in graphic design, motion graphics, and video production, creating engaging content that connects. Beyond creativity, my strength lies in <span class="textEmphasis">executing designs precisely</span>, whether following complex specifications or building from scratch.
     
-    <br><br>When I'm not working, I'm exploring new <span class="textEmphasis">3D and UI/UX tools</span> or sketching personal concepts just for fun. I'm always learning, always creating, and always up for the next challenge. Want to learn more or collaborate on a project?`,
+    <br><br>When I'm not working, I'm exploring new <span class="textEmphasis">3D and UI/UX tools</span> or sketching personal concepts just for fun. I'm always learning, always creating, and always up for the next challenge. Want to learn more about me or collaborate on a project?`,
 
     linkedin: "https://www.linkedin.com/in/chad-hearrell-92452596",
 
@@ -75,14 +75,26 @@ const portfolioOwner = {
             suffix: "+",
             label: "Creative Hours Logged"
         }
-    ]
+    ],
+
+    blogUrl: "",
+    
+    youtubeUrl: "",
 };
 
+const categoryDisplayOrder = [
+    "3D & Animation",
+    "UI & Interactive Training",
+    "Motion Graphics & Branding",
+    "Visual Identity & Print Design",
+    
+];
+
 const projectCategories = {
-    "IMMERSIVE": "Immersive 3D & Animation",
-    "MOTION": "Motion Graphics & Brand Videos",
+    "IMMERSIVE": "3D & Animation",
+    "MOTION": "Motion Graphics & Branding",
     "IDENTITY": "Visual Identity & Print Design",
-    "UIUX": "User Interfaces & Interactive Training"
+    "UIUX": "UI & Interactive Training"
 };
 
 const data = [
