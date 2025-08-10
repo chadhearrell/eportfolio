@@ -10,6 +10,7 @@
     --text-muted: #6b7280;
     --grey-border: #f1f1f1;
     --text-dark: #111827;
+    --grey-bg: #cccccc;
     --rounded: 12px;
     --font-stack: 'Poppins', sans-serif;
 }
@@ -51,7 +52,7 @@ a:hover {
 }
 
 .bg-body-tertiary {
-    background: linear-gradient(to bottom, #fefeff, #f6f8fa);
+    background: var(--grey-bg);
     border-top: var(--grey-border) 1px solid;
     border-bottom: var(--grey-border) 1px solid;
 }
@@ -228,6 +229,7 @@ h4:first-of-type {
     background: var(--comp-color);
     padding: 100px 0 80px;
     text-align: center;
+    border-bottom: var(--grey-border) 1px solid;
 }
 
 .intro-title {
@@ -251,6 +253,8 @@ h4:first-of-type {
 }
 
 .navbar-expand-lg .navbar-nav {
+    font-weight: bold;
+    font-size: 0.95rem;
     gap: 1rem;
 }
 

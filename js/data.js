@@ -1,6 +1,6 @@
 const portfolioOwner = {
     name: "Chad Hearrell",
-    about: `I'm a multimedia designer who brings ideas to life through <span class="textEmphasis">3D, motion, and dynamic visuals</span>.<br><br>
+    about: `Hi, I'm <span class="textEmphasis">Chad</span>!<br><br>I'm a multimedia designer who brings ideas to life through <span class="textEmphasis">3D, motion, and dynamic visuals</span>.<br><br>
     
     With 12+ years of experience, I specialize in graphic design, motion graphics, and video production, creating engaging content that connects. Beyond creativity, my strength lies in <span class="textEmphasis">executing designs precisely</span>, whether following complex specifications or building from scratch.
     

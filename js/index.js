@@ -152,14 +152,8 @@ function generateCompetencies() {
     $("#competencies-container").html(html);
 }
 
-
-
 function initCategoryFilter() {
   
-  const usedKeys = Object.keys(projectCategories).filter(key => {
-    return data.some(p => p.categoryKey === key);
-  });
-
   const orderedKeys = categoryDisplayOrder.map(displayName => {
     return Object.keys(projectCategories)
       .find(key => projectCategories[key] === displayName);
@@ -170,7 +164,7 @@ function initCategoryFilter() {
   const pills = orderedKeys.map(key => {
     const label = projectCategories[key] || key;
     const isActive = key === activeCategoryKey ? "active" : "";
-    return `<button class="filter-btn ${isActive}" data-key="${key}" aria-pressed="${isActive ? "true" : "false"}">${label}</button>`;
+    return `<button class="filter-btn ${isActive}" title="${label}" data-key="${key}" aria-pressed="${isActive ? "true" : "false"}">${label}</button>`;
   }).join("");
 
   const $filter = $(`<div id="portfolioFilter" class="category-filter" role="tablist">${pills}</div>`);
