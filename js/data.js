@@ -194,7 +194,7 @@ const data = [
         demo: [
             {
                 title: "Watch Video",
-                link: "media/plank_replacement_tutorial_720.mp4"
+                link: "https://drive.google.com/file/d/1L5iyktxNJomPOZF5CYpHI7lRmBzdQ88v/view?usp=sharing"
             }
         ]
     },
