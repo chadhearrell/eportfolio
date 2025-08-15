@@ -187,7 +187,8 @@ function initCategoryFilter() {
 
 function renderPortfolioByCategory() {
  
-  const projects = data.filter(p => p.categoryKey === activeCategoryKey);
+  const projects = data.filter(p => p.categoryKey === activeCategoryKey)
+                  .sort((a, b) => parseInt(b.year) - parseInt(a.year));
   let htmlStr = '<div class="row g-4">';
 
   projects.forEach(project => {
@@ -198,7 +199,7 @@ function renderPortfolioByCategory() {
           <div class="artifact-content">
             <h4 class="artifact-title">${project.title}</h4>
             <p class="artifact-year">${project.year}</p>
-            <p class="artifact-description">${project.short_desc || ""}</p>
+            <p class="artifact-description">${project.description || ""}</p>
             <a class="btn" href="#" onclick="modalHandler(event, '${project.id}')" title="View Project">View Project</a>
           </div>
         </div>
